@@ -24,9 +24,10 @@ export default {
       data: data
     })
   },
+  // 删除
   deleteData(id){
     return request({
-      url: '/acs/category/deleteCategory/' + id,
+      url: `/acs/category/deleteCategory/${id}`,
       method: 'delete'
       // , params: {id: id}
     })
