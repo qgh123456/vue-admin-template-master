@@ -127,21 +127,27 @@
             // this.edit.formData = this.list.find((ele) => (ele.id == id));
           },
           handleDelete(id){
-            category.deleteData(id).then(response =>{
-              if(response.code == 200){
+            this.$confirm('确认删除这条记录吗?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              category.deleteData(id).then(response =>{
+                  this.$message({
+                    message: '删除成功',
+                    type: response.code == 200 ? 'success' : 'warning'
+                  });
+                // 刷新列表
+                this.queryData();
+              }).catch(response =>{
                 this.$message({
-                  message: '删除成功',
-                  type: 'success'
+                  message: '删除异常',
+                  type: 'error'
                 });
-              };
-              // 刷新列表
-              this.queryData();
-            }).catch(response =>{
-              this.$message({
-                message: '删除异常',
-                type: 'error'
               });
-            })
+            }).catch(() => {
+              // 取消删除
+            });
           },
           // val 切换之后的每页显示多少条
           handleSizeChange(val){
