@@ -98,6 +98,7 @@
         },
         methods: {
           fetchData() {
+            console.log(this.query);
             category.getList(this.query,this.page.pageNo,this.page.pageSize).then(response =>{
               // 列表数据
               this.list = response.data.records;
