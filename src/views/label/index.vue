@@ -4,7 +4,7 @@
       <!--搜索框-->
       <el-form :inline="true" :model="query" size="mini">
         <el-form-item label="标签名称: ">
-          <el-input v-model.trim="query.labelName"></el-input>
+          <el-input v-model.trim="query.labelName" clearable></el-input>
         </el-form-item>
         <el-form-item label="分类名称: ">
           <el-select v-model.trim="query.id" clearable filterable style="width:105px;">
@@ -39,7 +39,7 @@
       </div>
 
       <!--新增弹框-->
-      <edit :title="edit.title" :dialogVisible="edit.visible" :formData="edit.formData" :remoteClose="remoteClose"></edit>
+      <edit :title="edit.title" :dialogVisible="edit.visible" :formData="edit.formData" :remoteClose="remoteClose" :categoryNameOptions="categoryNameOptions"></edit>
     </div>
   </div>
 
@@ -64,9 +64,10 @@
             },
             query: {},
             categoryNameOptions: [],
+            // 子组件引用对象
             edit: {
               title: '',
-              visible: false,
+              visible: true,
               formData: {}
             }
           }
@@ -87,7 +88,6 @@
           getListCategory(){
             categoryApi.getListCategory("").then(response =>{
               this.categoryNameOptions = response.data;
-              console.log(response);
             })
           },
           handleEdit(id){
@@ -114,8 +114,16 @@
           },
           // 打开新增窗口
           openAdd(){
-            // this.edit.visible = true;
-            // this.edit.title = '新增';
+            // 打开窗口，再调用一次查询下拉框中的接口
+            this.getListCategory();
+            this.edit.visible = true;
+            this.edit.title = '新增';
+          },
+          // 子组件会触发此事件的方法来关闭窗口
+          remoteClose(){
+            this.edit.formData = {};
+            this.edit.visible = false;
+            this.fetchData();
           }
         }
 
