@@ -16,6 +16,28 @@ export default {
       method: 'post',
       data: data
     })
+  },
+  // 获取详情
+  getDetail(id){
+    return request({
+      url: `/acs/label/selectLabelById`,
+      method: 'get',
+      params: {id:id}
+    })
+  },
+  deleteLabel(id){
+    return request({
+      url: `/acs/label/deleteLabel`,
+      method: 'delete',
+      params: {id:id}
+    })
+  },
+  updateLabel(data){
+    return request({
+      url: `/acs/label/updateLabel`,
+      method: 'put',
+      data: data
+    })
   }
 
 }
