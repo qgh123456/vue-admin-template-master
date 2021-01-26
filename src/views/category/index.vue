@@ -40,7 +40,6 @@
 
       <!--分页组件-->
       <div class="block">
-        <!--<span class="demonstration"></span>-->
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page.pageNo" :page-sizes="[8, 16, 24, 32]" :page-size="page.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="page.total">
         </el-pagination>
       </div>
