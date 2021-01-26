@@ -23,7 +23,6 @@
         <el-table-column type="index" align="center" label="序号" width="60"></el-table-column>
         <el-table-column align="center" prop="labelName" label="标签名称" width="180"></el-table-column>
         <el-table-column align="center" prop="categoryName" label="分类名称" width="180"></el-table-column>
-
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
@@ -91,10 +90,41 @@
             })
           },
           handleEdit(id){
-            console.log('编辑',id);
+            api.getDetail(id).then(response => {
+              if(response.code == 200){
+                this.edit.formData = response.data;
+                this.edit.visible = true;
+                this.edit.title = '修改';
+              }else {
+                this.$message({
+                  message: '修改异常',
+                  type: 'error'
+                });
+              }
+            })
           },
           handleDelete(id){
-            console.log('删除',id);
+            this.$confirm('确认删除这条记录吗?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              api.deleteLabel(id).then(response =>{
+                this.$message({
+                  message: response.message,
+                  type: response.code == 200 ? 'success' : 'warning'
+                });
+                // 刷新列表
+                this.queryData();
+              }).catch(response =>{
+                this.$message({
+                  message: '删除异常',
+                  type: 'error'
+                });
+              });
+            }).catch(() => {
+              // 取消删除
+            });
           },
           handleSizeChange(val){
             this.page.size = val;

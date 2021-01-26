@@ -67,13 +67,11 @@
 
         },
         submitForm(formName){
-
           // 提交表单
           this.$refs[formName].validate((valid) => {
             if(valid) {
               // 通过校验，提交表单
               this.submitData();
-
             }else {
               return false;
 
@@ -82,8 +80,15 @@
         },
         // 调用接口,提交数据
         async submitData() {
-          let response = await api.add(this.formData);
-          if(response.code = 200){
+          let response = null;
+          if(typeof(this.formData.id) == "undefined"){
+            // 新增
+            response = await api.add(this.formData);
+          }else {
+            // 修改
+            response = await api.updateLabel(this.formData);
+          }
+          if(response.code == 200){
             this.$message({
               message: '保存成功',
               type: 'success'
