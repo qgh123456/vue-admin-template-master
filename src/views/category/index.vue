@@ -121,7 +121,6 @@
             this.edit.title = '修改';
             category.getDetail(id).then(response =>{
               if(response.code == 200){
-                console.log(response.data);
                 this.edit.formData = response.data;
               };
             })
