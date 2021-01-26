@@ -141,6 +141,7 @@
           },
           reload(){
             this.query = {};
+            this.fetchData();
           },
           // 打开新增窗口
           openAdd(){
