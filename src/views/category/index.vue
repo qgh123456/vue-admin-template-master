@@ -113,6 +113,7 @@
           // 重置
           reload(){
             this.query = {};
+            this.fetchData();
           },
           handleEdit(id){
             // 修改
