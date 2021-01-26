@@ -1,5 +1,6 @@
 import request from '@/utils/request';
 
+var apiUrl = "";
 
 export default {
   // 查询分页列表
@@ -39,5 +40,13 @@ export default {
       // , params: {id: id}
     })
   },
+
+  getListCategory(query) {
+    return request({
+      url: '/acs/category/getListCategory',
+      method: 'post',
+      params: query
+    })
+  }
 
 }

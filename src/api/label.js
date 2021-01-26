@@ -9,5 +9,13 @@ export default {
       data: query // 合并为一个新对象
     })
   },
+  // 新增标签
+  add(data){
+    return request({
+      url: `/acs/label/saveLabel`,
+      method: 'post',
+      data: data
+    })
+  }
 
 }
