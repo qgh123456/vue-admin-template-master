@@ -1,12 +1,12 @@
 <template>
-  <el-dialog :rules="rules" :title="title" :visible.sync="dialogVisible" width="400px" :before-close="cancelForm">
+  <el-dialog  :title="title" :visible.sync="dialogVisible" width="400px" :before-close="cancelForm">
 
-    <el-form ref="formData" :model="formData" label-width="100px"  label-position="right" style="width: 300px" status-icon>
-      <el-form-item label="标签名称: "  prop="name">
-        <el-input v-model="formData.name" clearable></el-input>
+    <el-form :rules="rules" ref="formData" :model="formData" label-width="100px"  label-position="right" style="width: 300px" status-icon>
+      <el-form-item label="标签名称: "  prop="labelName">
+        <el-input v-model.trim="formData.labelName" clearable></el-input>
       </el-form-item>
-      <el-form-item label="分类名称: ">
-        <el-select v-model.trim="formData.categoryId" clearable filterable>
+      <el-form-item label="分类名称: " prop="categoryId">
+        <el-select v-model.trim="formData.categoryId"  clearable filterable >
           <el-option v-for="item in categoryNameOptions" :key="item.id" :label="item.name" :value="item.id">
           </el-option>
         </el-select>
@@ -48,7 +48,7 @@
       data(){
         return {
           rules: {
-            name: [
+            labelName: [
               {required: true,message: '请输入标签名称',trigger: 'blur'}
             ],
             categoryId: [
@@ -67,6 +67,7 @@
 
         },
         submitForm(formName){
+
           // 提交表单
           this.$refs[formName].validate((valid) => {
             if(valid) {

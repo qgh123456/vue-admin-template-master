@@ -59,7 +59,7 @@
             list: [], // 封装列表数据
             page: { // 分页对象
               current: 1,
-              size: 20,
+              size: 8,
               total: 0
             },
             query: {},
@@ -67,7 +67,7 @@
             // 子组件引用对象
             edit: {
               title: '',
-              visible: true,
+              visible: false,
               formData: {}
             }
           }
