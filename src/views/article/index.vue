@@ -42,7 +42,7 @@
       <el-table-column align="center" prop="updateTime" label="最后更新时间" width="180"></el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
+          <el-button type="success" @click="openAudit(scope.row.id)" size="mini">审核</el-button>
           <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
         </template>
       </el-table-column>
@@ -111,6 +111,10 @@
           handleCurrentChange(val){
             this.page.pageNo = val;
             this.fetchData();
+          },
+          // 审核文章
+          openAudit(id){
+
           }
         }
 
